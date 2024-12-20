@@ -6,4 +6,20 @@ def extract_dados_bitcoin():
     dados = response.json()
     return dados
 
-print(extract_dados_bitcoin()["data"]["amount"])
+def transform_dados_bitcoin(dados):
+    valor = dados["data"]["amount"]
+    criptomoeda = dados["data"]["base"]
+    moeda = dados["data"]["currency"]
+
+    dados_transformados = {
+        "valor": valor,
+        "criptomoeda": criptomoeda,
+        "moeda": moeda
+    }
+
+    return dados_transformados
+
+if __name__ == "__main__":
+    dados_json = extract_dados_bitcoin()
+    dados_tratados = transform_dados_bitcoin(dados_json)
+    print(dados_tratados)
